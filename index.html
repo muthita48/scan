@@ -1,18 +1,20 @@
-```html
 <!DOCTYPE html>
+
 <html lang="th">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<title>ระบบตรวจสอบการเข้าโรงเรียน</title>
+<title>
+ระบบตรวจสอบการเข้าโรงเรียน
+</title>
 
-
-<!-- Face API -->
 
 <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js"></script>
 
@@ -40,13 +42,14 @@ body {
 }
 
 
-/* =========================
-   Header
-========================= */
-
 header {
 
-  background: #2563eb;
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #4f46e5
+    );
 
   color: white;
 
@@ -61,7 +64,7 @@ header h1 {
 
   margin: 0;
 
-  font-size: 25px;
+  font-size: 26px;
 
 }
 
@@ -75,10 +78,6 @@ header p {
 }
 
 
-/* =========================
-   Container
-========================= */
-
 .container {
 
   max-width: 1100px;
@@ -90,32 +89,29 @@ header p {
 }
 
 
-/* =========================
-   Navigation
-========================= */
+.menu {
 
-nav {
+  display: grid;
 
-  display: flex;
+  grid-template-columns:
+    repeat(4, 1fr);
 
-  gap: 10px;
-
-  flex-wrap: wrap;
+  gap: 12px;
 
   margin-bottom: 20px;
 
 }
 
 
-nav button {
+.menu button {
 
   border: none;
 
+  padding: 15px;
+
+  border-radius: 12px;
+
   background: white;
-
-  padding: 12px 18px;
-
-  border-radius: 10px;
 
   cursor: pointer;
 
@@ -127,18 +123,12 @@ nav button {
 }
 
 
-nav button.active {
+.menu button:hover {
 
-  background: #2563eb;
-
-  color: white;
+  background: #eff6ff;
 
 }
 
-
-/* =========================
-   Page
-========================= */
 
 .page {
 
@@ -154,107 +144,106 @@ nav button.active {
 }
 
 
-/* =========================
-   Cards
-========================= */
+.card {
 
-.cards {
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.08);
+
+}
+
+
+.stats {
 
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(200px, 1fr));
+    repeat(3, 1fr);
 
   gap: 15px;
 
 }
 
 
-.card {
-
-  background: white;
+.stat {
 
   padding: 20px;
 
   border-radius: 15px;
 
-  box-shadow:
-    0 3px 12px rgba(0,0,0,.08);
+  background: #eff6ff;
 
 }
 
 
-.card h3 {
+.stat h3 {
 
-  margin-top: 0;
-
-  color: #64748b;
+  margin: 0;
 
   font-size: 15px;
 
 }
 
 
-.card strong {
+.stat strong {
+
+  display: block;
+
+  margin-top: 8px;
 
   font-size: 30px;
 
-  color: #2563eb;
-
 }
 
 
-/* =========================
-   Form
-========================= */
-
-.form-box {
-
-  background: white;
-
-  padding: 25px;
-
-  border-radius: 15px;
-
-  box-shadow:
-    0 3px 12px rgba(0,0,0,.08);
-
-}
-
-
-input,
-select {
+input {
 
   width: 100%;
 
-  padding: 12px;
+  padding: 13px;
 
-  margin:
-    7px 0 15px;
+  border: 1px solid #cbd5e1;
 
-  border:
-    1px solid #cbd5e1;
+  border-radius: 10px;
 
-  border-radius: 9px;
+  margin: 7px 0 14px;
 
-  font-size: 15px;
+  font-size: 16px;
 
 }
 
 
 button.primary {
 
+  width: 100%;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
   background: #2563eb;
 
   color: white;
 
-  border: none;
-
-  padding: 12px 20px;
-
-  border-radius: 9px;
+  font-size: 16px;
 
   cursor: pointer;
+
+}
+
+
+button.success {
+
+  background: #16a34a;
 
 }
 
@@ -262,34 +251,6 @@ button.primary {
 button.danger {
 
   background: #dc2626;
-
-  color: white;
-
-  border: none;
-
-  padding: 8px 12px;
-
-  border-radius: 7px;
-
-}
-
-
-/* =========================
-   Camera
-========================= */
-
-.camera-box {
-
-  background: white;
-
-  padding: 20px;
-
-  border-radius: 15px;
-
-  text-align: center;
-
-  box-shadow:
-    0 3px 12px rgba(0,0,0,.08);
 
 }
 
@@ -302,39 +263,33 @@ video {
 
   border-radius: 15px;
 
-  background: #0f172a;
+  background: #000;
+
+  display: block;
+
+  margin: 15px auto;
+
+}
+
+
+.camera-box {
+
+  text-align: center;
 
 }
 
 
 .status {
 
-  margin: 15px;
+  text-align: center;
 
-  padding: 12px;
-
-  background: #eff6ff;
-
-  color: #1d4ed8;
+  padding: 15px;
 
   border-radius: 10px;
 
-}
+  background: #f8fafc;
 
-
-/* =========================
-   Table
-========================= */
-
-.table-box {
-
-  background: white;
-
-  padding: 20px;
-
-  border-radius: 15px;
-
-  overflow-x: auto;
+  margin-top: 10px;
 
 }
 
@@ -351,7 +306,7 @@ table {
 th,
 td {
 
-  padding: 11px;
+  padding: 10px;
 
   border-bottom:
     1px solid #e2e8f0;
@@ -361,54 +316,30 @@ td {
 }
 
 
-th {
+@media(max-width:700px) {
 
-  background: #eff6ff;
+  .menu {
 
-}
+    grid-template-columns:
+      repeat(2, 1fr);
 
-
-/* =========================
-   Result
-========================= */
-
-.result {
-
-  margin-top: 15px;
-
-  padding: 15px;
-
-  border-radius: 10px;
-
-  background: #f8fafc;
-
-}
+  }
 
 
-.success {
+  .stats {
 
-  background: #dcfce7;
+    grid-template-columns: 1fr;
 
-  color: #166534;
+  }
+
+
+  header h1 {
+
+    font-size: 21px;
+
+  }
 
 }
-
-
-.error {
-
-  background: #fee2e2;
-
-  color: #991b1b;
-
-}
-
-
-.hidden {
-
-  display: none;
-
-}
-
 
 </style>
 
@@ -420,9 +351,13 @@ th {
 
 <header>
 
-<h1>👤 ระบบตรวจสอบการเข้าโรงเรียน</h1>
+<h1>
+🏫 ระบบตรวจสอบการเข้าโรงเรียน
+</h1>
 
-<p>ระบบรู้จำใบหน้า</p>
+<p>
+ระบบรู้จำใบหน้า
+</p>
 
 </header>
 
@@ -430,45 +365,48 @@ th {
 <div class="container">
 
 
-<!-- Navigation -->
+<div class="menu">
 
-<nav>
-
-<button class="active"
-        onclick="showPage('dashboard', this)">
-แดชบอร์ด
+<button onclick="showPage('home')">
+🏠 หน้าแรก
 </button>
 
-<button onclick="showPage('register', this)">
-ลงทะเบียนนักเรียน
+<button onclick="showPage('register')">
+👨‍🎓 ลงทะเบียน
 </button>
 
-<button onclick="showPage('scan', this)">
-เช็คชื่อ
+<button onclick="showPage('scan')">
+📷 สแกนใบหน้า
 </button>
 
-<button onclick="showPage('report', this)">
-รายงาน
+<button onclick="showPage('report')">
+📊 รายงาน
 </button>
 
-</nav>
+</div>
 
 
-<!-- =========================
-     Dashboard
-========================= -->
+<!-- HOME -->
 
-<section id="dashboard"
-         class="page active">
-
-<h2>แดชบอร์ด</h2>
-
-
-<div class="cards">
+<section
+  id="home"
+  class="page active"
+>
 
 <div class="card">
 
-<h3>นักเรียนทั้งหมด</h3>
+<h2>
+ภาพรวมระบบ
+</h2>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<h3>
+นักเรียนทั้งหมด
+</h3>
 
 <strong id="totalStudents">
 0
@@ -477,9 +415,11 @@ th {
 </div>
 
 
-<div class="card">
+<div class="stat">
 
-<h3>เช็กชื่อวันนี้</h3>
+<h3>
+เช็กชื่อวันนี้
+</h3>
 
 <strong id="todayAttendance">
 0
@@ -488,11 +428,13 @@ th {
 </div>
 
 
-<div class="card">
+<div class="stat">
 
-<h3>ยังไม่เช็กชื่อ</h3>
+<h3>
+การเช็กชื่อทั้งหมด
+</h3>
 
-<strong id="notChecked">
+<strong id="totalAttendance">
 0
 </strong>
 
@@ -500,13 +442,183 @@ th {
 
 </div>
 
+</div>
 
-<br>
+</section>
 
 
-<div class="table-box">
+<!-- REGISTER -->
 
-<h3>การเข้าโรงเรียนล่าสุด</h3>
+<section
+  id="register"
+  class="page"
+>
+
+<div class="card">
+
+<h2>
+👨‍🎓 ลงทะเบียนนักเรียน
+</h2>
+
+
+<input
+  id="studentId"
+  placeholder="รหัสนักเรียน"
+/>
+
+
+<input
+  id="studentName"
+  placeholder="ชื่อนักเรียน"
+/>
+
+
+<input
+  id="studentClass"
+  placeholder="ห้องเรียน เช่น ม.1/1"
+/>
+
+
+<div class="camera-box">
+
+<video
+  id="registerVideo"
+  autoplay
+  muted
+  playsinline
+></video>
+
+
+<button
+  class="primary"
+  onclick="startRegisterCamera()"
+>
+
+เปิดกล้อง
+
+</button>
+
+
+<br><br>
+
+
+<button
+  class="primary success"
+  onclick="registerFace()"
+>
+
+บันทึกใบหน้า
+
+</button>
+
+
+<div
+  id="registerStatus"
+  class="status"
+>
+
+ยังไม่ได้เปิดกล้อง
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SCAN -->
+
+<section
+  id="scan"
+  class="page"
+>
+
+<div class="card">
+
+<h2>
+📷 สแกนใบหน้า
+</h2>
+
+
+<div class="camera-box">
+
+<video
+  id="scanVideo"
+  autoplay
+  muted
+  playsinline
+></video>
+
+
+<button
+  class="primary"
+  onclick="startScan()"
+>
+
+เริ่มสแกน
+
+</button>
+
+
+<br><br>
+
+
+<button
+  class="primary danger"
+  onclick="stopScan()"
+>
+
+หยุดกล้อง
+
+</button>
+
+
+<div
+  id="scanStatus"
+  class="status"
+>
+
+กดเริ่มสแกนเพื่อเปิดกล้อง
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REPORT -->
+
+<section
+  id="report"
+  class="page"
+>
+
+<div class="card">
+
+<h2>
+📊 รายงานการเข้าโรงเรียน
+</h2>
+
+
+<button
+  class="primary"
+  onclick="loadReport()"
+>
+
+โหลดข้อมูล
+
+</button>
+
+
+<br><br>
+
+
+<div style="overflow-x:auto;">
 
 <table>
 
@@ -528,211 +640,15 @@ th {
 
 </thead>
 
-<tbody id="recentTable">
+<tbody
+  id="reportBody"
+>
 
 </tbody>
 
 </table>
 
 </div>
-
-</section>
-
-
-<!-- =========================
-     Register
-========================= -->
-
-<section id="register"
-         class="page">
-
-<h2>ลงทะเบียนนักเรียน</h2>
-
-
-<div class="form-box">
-
-<label>รหัสนักเรียน</label>
-
-<input
-  id="studentId"
-  placeholder="กรอกรหัสนักเรียน">
-
-
-<label>ชื่อนักเรียน</label>
-
-<input
-  id="studentName"
-  placeholder="กรอกชื่อนักเรียน">
-
-
-<label>ห้องเรียน</label>
-
-<input
-  id="studentClass"
-  placeholder="เช่น ม.6/1">
-
-
-<div class="camera-box">
-
-<h3>📷 บันทึกใบหน้า</h3>
-
-<video
-  id="registerVideo"
-  autoplay
-  muted
-  playsinline>
-</video>
-
-
-<div class="status"
-     id="registerStatus">
-
-กำลังเตรียมกล้อง...
-
-</div>
-
-
-<button class="primary"
-        onclick="captureFace()">
-
-บันทึกใบหน้า
-
-</button>
-
-</div>
-
-
-<button class="primary"
-        style="margin-top:15px"
-        onclick="registerStudent()">
-
-ลงทะเบียนนักเรียน
-
-</button>
-
-
-<div id="registerResult"
-     class="result hidden">
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     Scan
-========================= -->
-
-<section id="scan"
-         class="page">
-
-<h2>เช็คชื่อด้วยใบหน้า</h2>
-
-
-<div class="camera-box">
-
-<video
-  id="scanVideo"
-  autoplay
-  muted
-  playsinline>
-</video>
-
-
-<div id="scanStatus"
-     class="status">
-
-กำลังเตรียมระบบ AI...
-
-</div>
-
-
-<div id="scanResult"
-     class="result hidden">
-</div>
-
-
-<button class="primary"
-        onclick="startScan()">
-
-เริ่มเช็คชื่อ
-
-</button>
-
-
-<button class="danger"
-        onclick="stopScan()">
-
-หยุด
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     Report
-========================= -->
-
-<section id="report"
-         class="page">
-
-<h2>รายงานการเข้าโรงเรียน</h2>
-
-
-<div class="form-box">
-
-<label>เลือกวันที่</label>
-
-<input
-  type="date"
-  id="reportDate">
-
-
-<button class="primary"
-        onclick="loadReport()">
-
-ค้นหา
-
-</button>
-
-</div>
-
-
-<br>
-
-
-<div class="table-box">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>รหัสนักเรียน</th>
-
-<th>ชื่อ</th>
-
-<th>ห้อง</th>
-
-<th>เวลา</th>
-
-<th>สถานะ</th>
-
-</tr>
-
-</thead>
-
-
-<tbody id="reportTable">
-
-</tbody>
-
-</table>
 
 </div>
 
@@ -745,170 +661,97 @@ th {
 <script>
 
 
-// ==================================================
-// URL Google Apps Script
-// ==================================================
+/* =========================
+   CONFIG
+========================= */
 
 const GAS_URL =
-  'https://script.google.com/macros/s/AKfycbzMljughzR3sNAOUHfWBLbv7ngIgtR7z3-pGapn_jSwrFX-Mfc4T9aeHAr3NFcJsa8HXQ/exec';
+'https://script.google.com/macros/s/AKfycbyqikxsEvqAQaTKx36Y4BAzv84oW06ZwT-Ppvwt3zj7tFnN_FP9VQNpH6f7ofgFnjrhdw/exec';
 
 
-// ==================================================
-// ตัวแปรระบบ
-// ==================================================
+const MODEL_URL =
+'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model';
+
 
 let students = [];
-
-let registerDescriptor = null;
 
 let registerStream = null;
 
 let scanStream = null;
 
-let scanInterval = null;
+let scanRunning = false;
 
 let modelsLoaded = false;
 
 
-// ==================================================
-// ติดต่อ Google Apps Script
-// ==================================================
+/* =========================
+   API
+========================= */
 
-async function server(
-  action,
-  data = {}
-) {
+async function api(action, data = {}) {
 
-  if (
-    !GAS_URL ||
-    GAS_URL.includes(
-      'https://script.google.com/macros/s/AKfycbzMljughzR3sNAOUHfWBLbv7ngIgtR7z3-pGapn_jSwrFX-Mfc4T9aeHAr3NFcJsa8HXQ/exec'
-    )
-  ) {
+  const body = {
 
-    throw new Error(
-      'กรุณาใส่ URL Google Apps Script /exec'
-    );
+    action: action,
 
-  }
+    ...data
+
+  };
 
 
   const response =
     await fetch(
-      https://script.google.com/macros/s/AKfycbzMljughzR3sNAOUHfWBLbv7ngIgtR7z3-pGapn_jSwrFX-Mfc4T9aeHAr3NFcJsa8HXQ/exec,
+      GAS_URL,
       {
 
         method: 'POST',
 
         headers: {
+
           'Content-Type':
             'text/plain;charset=utf-8'
+
         },
 
-        body:
-          JSON.stringify({
-
-            action: action,
-
-            data: data
-
-          })
+        body: JSON.stringify(body)
 
       }
     );
 
 
-  if (!response.ok) {
-
-    throw new Error(
-      'เชื่อมต่อ Google Apps Script ไม่สำเร็จ'
-    );
-
-  }
-
-
-  const result =
-    await response.json();
-
-
-  if (!result.success) {
-
-    throw new Error(
-      result.error ||
-      'เกิดข้อผิดพลาด'
-    );
-
-  }
-
-
-  return result.data;
+  return await response.json();
 
 }
 
 
-// ==================================================
-// เปลี่ยนหน้า
-// ==================================================
+/* =========================
+   PAGE
+========================= */
 
-function showPage(
-  pageId,
-  button
-) {
+function showPage(page) {
 
   document
     .querySelectorAll('.page')
-    .forEach(
-      page =>
-        page.classList.remove(
-          'active'
-        )
-    );
+    .forEach(p => {
+
+      p.classList.remove('active');
+
+    });
 
 
   document
-    .getElementById(pageId)
-    .classList.add(
-      'active'
-    );
+    .getElementById(page)
+    .classList.add('active');
 
 
-  document
-    .querySelectorAll('nav button')
-    .forEach(
-      btn =>
-        btn.classList.remove(
-          'active'
-        )
-    );
-
-
-  button.classList.add(
-    'active'
-  );
-
-
-  if (pageId === 'register') {
-
-    startRegisterCamera();
-
-  }
-
-
-  if (pageId === 'scan') {
-
-    loadModels();
-
-  }
-
-
-  if (pageId === 'dashboard') {
+  if (page === 'home') {
 
     loadDashboard();
 
   }
 
 
-  if (pageId === 'report') {
+  if (page === 'report') {
 
     loadReport();
 
@@ -917,145 +760,91 @@ function showPage(
 }
 
 
-// ==================================================
-// โหลดข้อมูลนักเรียน
-// ==================================================
+/* =========================
+   LOAD MODELS
+========================= */
 
-async function loadStudents() {
+async function loadModels() {
 
-  students =
-    await server(
-      'getStudents'
-    );
-
-}
+  if (modelsLoaded) return;
 
 
-// ==================================================
-// Dashboard
-// ==================================================
-
-async function loadDashboard() {
-
-  try {
-
-    await loadStudents();
+  document.getElementById(
+    'registerStatus'
+  ).textContent =
+    'กำลังโหลด AI...';
 
 
-    const report =
-      await server(
-        'getSummaryReport',
-        {
-          date:
-            getToday()
-        }
-      );
+  await faceapi.nets.tinyFaceDetector.loadFromUri(
+    MODEL_URL
+  );
 
 
-    document
-      .getElementById(
-        'totalStudents'
-      )
-      .textContent =
-        report.totalStudents;
+  await faceapi.nets.faceLandmark68Net.loadFromUri(
+    MODEL_URL
+  );
 
 
-    document
-      .getElementById(
-        'todayAttendance'
-      )
-      .textContent =
-        report.checkedToday;
+  await faceapi.nets.faceRecognitionNet.loadFromUri(
+    MODEL_URL
+  );
 
 
-    document
-      .getElementById(
-        'notChecked'
-      )
-      .textContent =
-        report.notChecked;
+  modelsLoaded = true;
 
 
-    const tbody =
-      document.getElementById(
-        'recentTable'
-      );
-
-
-    tbody.innerHTML = '';
-
-
-    report.records
-      .slice(0, 10)
-      .forEach(
-        item => {
-
-          const tr =
-            document.createElement(
-              'tr'
-            );
-
-
-          tr.innerHTML = `
-
-            <td>${item.studentId}</td>
-
-            <td>${item.name}</td>
-
-            <td>${item.class}</td>
-
-            <td>${formatTime(item.timestamp)}</td>
-
-            <td>${item.status}</td>
-
-          `;
-
-
-          tbody.appendChild(tr);
-
-        }
-      );
-
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
+  document.getElementById(
+    'registerStatus'
+  ).textContent =
+    'AI พร้อมใช้งาน';
 
 }
 
 
-// ==================================================
-// เปิดกล้องลงทะเบียน
-// ==================================================
+/* =========================
+   START REGISTER CAMERA
+========================= */
 
 async function startRegisterCamera() {
 
   try {
 
+    await loadModels();
+
+
     if (registerStream) {
-      return;
+
+      registerStream
+        .getTracks()
+        .forEach(t => t.stop());
+
     }
 
 
     registerStream =
-      await navigator.mediaDevices
-        .getUserMedia({
+      await navigator.mediaDevices.getUserMedia({
 
-          video: {
-            facingMode: 'user',
-            width: {
-              ideal: 640
-            },
-            height: {
-              ideal: 480
-            }
+        video: {
+
+          facingMode: 'user',
+
+          width: {
+
+            ideal: 640
+
           },
 
-          audio: false
+          height: {
 
-        });
+            ideal: 480
+
+          }
+
+        },
+
+        audio: false
+
+      });
 
 
     const video =
@@ -1068,92 +857,62 @@ async function startRegisterCamera() {
       registerStream;
 
 
-    document
-      .getElementById(
-        'registerStatus'
-      )
-      .textContent =
-        'กล้องพร้อมใช้งาน';
-
+    document.getElementById(
+      'registerStatus'
+    ).textContent =
+      'เปิดกล้องแล้ว กรุณามองกล้อง';
 
   } catch (error) {
 
-    document
-      .getElementById(
-        'registerStatus'
-      )
-      .textContent =
-        'ไม่สามารถเปิดกล้องได้: ' +
-        error.message;
+    console.error(error);
+
+
+    document.getElementById(
+      'registerStatus'
+    ).textContent =
+      'ไม่สามารถเปิดกล้องได้: ' +
+      error.message;
 
   }
 
 }
 
 
-// ==================================================
-// โหลด Face Recognition Model
-// ==================================================
+/* =========================
+   REGISTER FACE
+========================= */
 
-async function loadModels() {
-
-  if (modelsLoaded) {
-    return;
-  }
-
-
-  const MODEL_URL =
-    'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model';
-
-
-  document
-    .getElementById(
-      'scanStatus'
-    )
-    .textContent =
-      'กำลังโหลดระบบ AI...';
-
-
-  await faceapi.nets.tinyFaceDetector
-    .loadFromUri(
-      MODEL_URL
-    );
-
-
-  await faceapi.nets.faceLandmark68Net
-    .loadFromUri(
-      MODEL_URL
-    );
-
-
-  await faceapi.nets.faceRecognitionNet
-    .loadFromUri(
-      MODEL_URL
-    );
-
-
-  modelsLoaded = true;
-
-
-  document
-    .getElementById(
-      'scanStatus'
-    )
-    .textContent =
-      'ระบบ AI พร้อมใช้งาน';
-
-}
-
-
-// ==================================================
-// บันทึกใบหน้า
-// ==================================================
-
-async function captureFace() {
+async function registerFace() {
 
   try {
 
-    await loadModels();
+    const id =
+      document
+        .getElementById('studentId')
+        .value.trim();
+
+
+    const name =
+      document
+        .getElementById('studentName')
+        .value.trim();
+
+
+    const className =
+      document
+        .getElementById('studentClass')
+        .value.trim();
+
+
+    if (!id || !name || !className) {
+
+      alert(
+        'กรุณากรอกข้อมูลนักเรียนให้ครบ'
+      );
+
+      return;
+
+    }
 
 
     const video =
@@ -1162,222 +921,168 @@ async function captureFace() {
       );
 
 
-    const detection =
-      await faceapi
-        .detectSingleFace(
-          video,
-          new faceapi
-            .TinyFaceDetectorOptions()
-        )
-        .withFaceLandmarks()
-        .withFaceDescriptor();
+    if (!video.srcObject) {
 
-
-    if (!detection) {
-
-      throw new Error(
-        'ไม่พบใบหน้า กรุณาหันหน้าเข้ากล้อง'
+      alert(
+        'กรุณาเปิดกล้องก่อน'
       );
+
+      return;
 
     }
 
 
-    registerDescriptor =
-      Array.from(
-        detection.descriptor
+    document.getElementById(
+      'registerStatus'
+    ).textContent =
+      'กำลังบันทึกใบหน้า...';
+
+
+    const descriptors = [];
+
+
+    /*
+      เก็บใบหน้า 5 ตัวอย่าง
+      เพื่อช่วยให้รู้จำได้แม่นขึ้น
+    */
+
+    for (let i = 0; i < 5; i++) {
+
+      const detection =
+        await faceapi
+          .detectSingleFace(
+            video,
+            new faceapi.TinyFaceDetectorOptions({
+              inputSize: 320,
+              scoreThreshold: 0.5
+            })
+          )
+          .withFaceLandmarks()
+          .withFaceDescriptor();
+
+
+      if (!detection) {
+
+        alert(
+          'ไม่พบใบหน้า กรุณามองกล้อง'
+        );
+
+        return;
+
+      }
+
+
+      descriptors.push(
+        Array.from(
+          detection.descriptor
+        )
       );
 
 
-    document
-      .getElementById(
-        'registerResult'
-      )
-      .className =
-        'result success';
-
-
-    document
-      .getElementById(
-        'registerResult'
-      )
-      .textContent =
-        '✓ บันทึกข้อมูลใบหน้าเรียบร้อย';
-
-
-  } catch (error) {
-
-    const result =
       document.getElementById(
-        'registerResult'
-      );
+        'registerStatus'
+      ).textContent =
+        `กำลังบันทึก ${i + 1}/5`;
 
 
-    result.className =
-      'result error';
-
-
-    result.textContent =
-      error.message;
-
-  }
-
-}
-
-
-// ==================================================
-// ลงทะเบียนนักเรียน
-// ==================================================
-
-async function registerStudent() {
-
-  try {
-
-    const studentId =
-      document
-        .getElementById(
-          'studentId'
-        )
-        .value.trim();
-
-
-    const name =
-      document
-        .getElementById(
-          'studentName'
-        )
-        .value.trim();
-
-
-    const cls =
-      document
-        .getElementById(
-          'studentClass'
-        )
-        .value.trim();
-
-
-    if (!studentId) {
-
-      throw new Error(
-        'กรุณากรอกรหัสนักเรียน'
-      );
-
-    }
-
-
-    if (!name) {
-
-      throw new Error(
-        'กรุณากรอกชื่อนักเรียน'
-      );
-
-    }
-
-
-    if (!cls) {
-
-      throw new Error(
-        'กรุณากรอกห้องเรียน'
-      );
-
-    }
-
-
-    if (!registerDescriptor) {
-
-      throw new Error(
-        'กรุณาบันทึกใบหน้าก่อน'
-      );
+      await sleep(500);
 
     }
 
 
     const result =
-      await server(
+      await api(
         'addStudent',
         {
 
-          studentId:
-            studentId,
+          studentId: id,
 
-          name:
-            name,
+          name: name,
 
-          class:
-            cls,
+          className: className,
 
-          descriptor:
-            registerDescriptor
+          descriptors: descriptors
 
         }
       );
 
 
-    const box =
-      document.getElementById(
-        'registerResult'
+    if (!result.success) {
+
+      throw new Error(
+        result.message
       );
 
-
-    box.className =
-      'result success';
+    }
 
 
-    box.textContent =
-      '✓ ลงทะเบียนนักเรียนสำเร็จ';
+    alert(
+      'ลงทะเบียนนักเรียนสำเร็จ'
+    );
 
 
-    document
-      .getElementById(
-        'studentId'
-      )
-      .value = '';
+    document.getElementById(
+      'studentId'
+    ).value = '';
 
 
-    document
-      .getElementById(
-        'studentName'
-      )
-      .value = '';
+    document.getElementById(
+      'studentName'
+    ).value = '';
 
 
-    document
-      .getElementById(
-        'studentClass'
-      )
-      .value = '';
+    document.getElementById(
+      'studentClass'
+    ).value = '';
 
 
-    registerDescriptor =
-      null;
+    document.getElementById(
+      'registerStatus'
+    ).textContent =
+      'ลงทะเบียนเรียบร้อย';
 
 
     await loadStudents();
 
-
   } catch (error) {
 
-    const box =
-      document.getElementById(
-        'registerResult'
-      );
+    console.error(error);
 
-
-    box.className =
-      'result error';
-
-
-    box.textContent =
-      error.message;
+    alert(
+      'เกิดข้อผิดพลาด: ' +
+      error.message
+    );
 
   }
 
 }
 
 
-// ==================================================
-// เริ่มเช็คชื่อ
-// ==================================================
+/* =========================
+   LOAD STUDENTS
+========================= */
+
+async function loadStudents() {
+
+  const result =
+    await api(
+      'getStudents'
+    );
+
+
+  if (result.success) {
+
+    students =
+      result.students || [];
+
+  }
+
+}
+
+
+/* =========================
+   START SCAN
+========================= */
 
 async function startScan() {
 
@@ -1388,32 +1093,50 @@ async function startScan() {
     await loadStudents();
 
 
-    if (!students.length) {
+    if (students.length === 0) {
 
-      throw new Error(
+      alert(
         'ยังไม่มีข้อมูลนักเรียน'
       );
+
+      return;
+
+    }
+
+
+    if (scanStream) {
+
+      scanStream
+        .getTracks()
+        .forEach(t => t.stop());
 
     }
 
 
     scanStream =
-      await navigator.mediaDevices
-        .getUserMedia({
+      await navigator.mediaDevices.getUserMedia({
 
-          video: {
-            facingMode: 'user',
-            width: {
-              ideal: 640
-            },
-            height: {
-              ideal: 480
-            }
+        video: {
+
+          facingMode: 'user',
+
+          width: {
+
+            ideal: 640
+
           },
 
-          audio: false
+          height: {
 
-        });
+            ideal: 480
+
+          }
+
+        },
+
+        audio: false
+
+      });
 
 
     const video =
@@ -1426,45 +1149,41 @@ async function startScan() {
       scanStream;
 
 
-    document
-      .getElementById(
-        'scanStatus'
-      )
-      .textContent =
+    scanRunning = true;
+
+
+    document.getElementById(
+      'scanStatus'
+    ).textContent =
       'กำลังสแกนใบหน้า...';
 
 
-    if (scanInterval) {
-      clearInterval(
-        scanInterval
-      );
-    }
-
-
-    scanInterval =
-      setInterval(
-        scanFace,
-        1500
-      );
-
+    scanLoop();
 
   } catch (error) {
 
-    showScanResult(
-      error.message,
-      false
-    );
+    console.error(error);
+
+
+    document.getElementById(
+      'scanStatus'
+    ).textContent =
+      'เปิดกล้องไม่ได้: ' +
+      error.message;
 
   }
 
 }
 
 
-// ==================================================
-// ตรวจจับใบหน้า
-// ==================================================
+/* =========================
+   SCAN LOOP
+========================= */
 
-async function scanFace() {
+async function scanLoop() {
+
+  if (!scanRunning) return;
+
 
   const video =
     document.getElementById(
@@ -1472,328 +1191,254 @@ async function scanFace() {
     );
 
 
-  if (
-    !video.srcObject ||
-    video.readyState < 2
-  ) {
-
-    return;
-
-  }
-
-
-  const detection =
+  const detections =
     await faceapi
-      .detectSingleFace(
+      .detectAllFaces(
         video,
-        new faceapi
-          .TinyFaceDetectorOptions()
+        new faceapi.TinyFaceDetectorOptions({
+          inputSize: 320,
+          scoreThreshold: 0.5
+        })
       )
       .withFaceLandmarks()
-      .withFaceDescriptor();
+      .withFaceDescriptors();
 
 
-  if (!detection) {
+  if (detections.length > 0) {
 
-    document
-      .getElementById(
-        'scanStatus'
-      )
-      .textContent =
-      'ไม่พบใบหน้า';
+    for (const detection of detections) {
 
-    return;
-
-  }
+      const match =
+        findBestStudent(
+          detection.descriptor
+        );
 
 
-  const descriptor =
-    detection.descriptor;
+      if (
+        match &&
+        match.distance < 0.50
+      ) {
 
+        await checkAttendance(
+          match.student
+        );
 
-  let bestStudent = null;
-
-  let bestDistance =
-    Infinity;
-
-
-  for (
-    const student of students
-  ) {
-
-    if (
-      !student.descriptor ||
-      !student.descriptor.length
-    ) {
-
-      continue;
-
-    }
-
-
-    const studentDescriptor =
-      new Float32Array(
-        student.descriptor
-      );
-
-
-    const distance =
-      faceapi.euclideanDistance(
-        descriptor,
-        studentDescriptor
-      );
-
-
-    if (
-      distance <
-      bestDistance
-    ) {
-
-      bestDistance =
-        distance;
-
-      bestStudent =
-        student;
+      }
 
     }
 
   }
 
 
-  // ค่าต่ำกว่า = ใบหน้าคล้ายกัน
-  const THRESHOLD = 0.50;
-
-
-  if (
-    !bestStudent ||
-    bestDistance > THRESHOLD
-  ) {
-
-    showScanResult(
-      'ไม่พบข้อมูลนักเรียนที่ตรงกัน',
-      false
-    );
-
-
-    return;
-
-  }
-
-
-  // พบใบหน้า
-  document
-    .getElementById(
-      'scanStatus'
-    )
-    .textContent =
-      'พบใบหน้า: ' +
-      bestStudent.name;
-
-
-  try {
-
-    const result =
-      await server(
-        'recordAttendance',
-        {
-
-          studentId:
-            bestStudent.studentId,
-
-          name:
-            bestStudent.name,
-
-          class:
-            bestStudent.class,
-
-          location:
-            'โรงเรียน',
-
-          status:
-            'มา'
-
-        }
-      );
-
-
-    if (
-      result.alreadyChecked
-    ) {
-
-      showScanResult(
-        '⚠️ ' +
-        bestStudent.name +
-        ' เช็กชื่อวันนี้แล้ว',
-        false
-      );
-
-
-    } else {
-
-      showScanResult(
-        '✓ เช็กชื่อสำเร็จ<br>' +
-        bestStudent.name +
-        '<br>' +
-        bestStudent.class,
-        true
-      );
-
-    }
-
-
-  } catch (error) {
-
-    showScanResult(
-      error.message,
-      false
-    );
-
-  }
-
-}
-
-
-// ==================================================
-// แสดงผลการสแกน
-// ==================================================
-
-function showScanResult(
-  message,
-  success
-) {
-
-  const box =
-    document.getElementById(
-      'scanResult'
-    );
-
-
-  box.className =
-    success
-      ? 'result success'
-      : 'result error';
-
-
-  box.innerHTML =
-    message;
-
-
-  box.classList.remove(
-    'hidden'
+  setTimeout(
+    scanLoop,
+    1500
   );
 
 }
 
 
-// ==================================================
-// หยุดกล้อง
-// ==================================================
+/* =========================
+   FIND BEST STUDENT
+========================= */
+
+function findBestStudent(
+  descriptor
+) {
+
+  let bestStudent = null;
+
+  let bestDistance = Infinity;
+
+
+  for (const student of students) {
+
+    if (
+      !student.descriptors ||
+      student.descriptors.length === 0
+    ) {
+      continue;
+    }
+
+
+    for (
+      const savedDescriptor
+      of student.descriptors
+    ) {
+
+      const distance =
+        faceapi.euclideanDistance(
+          descriptor,
+          savedDescriptor
+        );
+
+
+      if (
+        distance <
+        bestDistance
+      ) {
+
+        bestDistance =
+          distance;
+
+        bestStudent =
+          student;
+
+      }
+
+    }
+
+  }
+
+
+  if (!bestStudent) {
+
+    return null;
+
+  }
+
+
+  return {
+
+    student:
+      bestStudent,
+
+    distance:
+      bestDistance
+
+  };
+
+}
+
+
+/* =========================
+   CHECK ATTENDANCE
+========================= */
+
+async function checkAttendance(
+  student
+) {
+
+  document.getElementById(
+    'scanStatus'
+  ).textContent =
+    `พบ ${student.name} กำลังบันทึก...`;
+
+
+  const result =
+    await api(
+      'recordAttendance',
+      {
+
+        studentId:
+          student.studentId,
+
+        name:
+          student.name,
+
+        className:
+          student.className
+
+      }
+    );
+
+
+  if (
+    result.alreadyChecked
+  ) {
+
+    document.getElementById(
+      'scanStatus'
+    ).textContent =
+      `${student.name} เช็กชื่อวันนี้แล้ว`;
+
+    return;
+
+  }
+
+
+  if (result.success) {
+
+    document.getElementById(
+      'scanStatus'
+    ).textContent =
+      `✅ ${student.name} เช็กชื่อสำเร็จ ${result.timestamp}`;
+
+  }
+
+}
+
+
+/* =========================
+   STOP SCAN
+========================= */
 
 function stopScan() {
 
-  if (scanInterval) {
-
-    clearInterval(
-      scanInterval
-    );
-
-    scanInterval =
-      null;
-
-  }
+  scanRunning = false;
 
 
   if (scanStream) {
 
     scanStream
       .getTracks()
-      .forEach(
-        track =>
-          track.stop()
-      );
+      .forEach(t => t.stop());
 
-
-    scanStream =
-      null;
+    scanStream = null;
 
   }
 
 
-  document
-    .getElementById(
-      'scanStatus'
-    )
-    .textContent =
-      'หยุดการสแกนแล้ว';
+  const video =
+    document.getElementById(
+      'scanVideo'
+    );
+
+
+  video.srcObject = null;
+
+
+  document.getElementById(
+    'scanStatus'
+  ).textContent =
+    'หยุดกล้องแล้ว';
 
 }
 
 
-// ==================================================
-// รายงาน
-// ==================================================
+/* =========================
+   DASHBOARD
+========================= */
 
-async function loadReport() {
+async function loadDashboard() {
 
   try {
 
-    const date =
-      document
-        .getElementById(
-          'reportDate'
-        )
-        .value ||
-      getToday();
-
-
-    const report =
-      await server(
-        'getSummaryReport',
-        {
-          date: date
-        }
+    const result =
+      await api(
+        'getStats'
       );
 
 
-    const tbody =
-      document.getElementById(
-        'reportTable'
-      );
+    if (!result.success) return;
 
 
-    tbody.innerHTML = '';
+    document.getElementById(
+      'totalStudents'
+    ).textContent =
+      result.totalStudents;
 
 
-    report.records
-      .forEach(
-        item => {
-
-          const tr =
-            document.createElement(
-              'tr'
-            );
+    document.getElementById(
+      'todayAttendance'
+    ).textContent =
+      result.todayAttendance;
 
 
-          tr.innerHTML = `
-
-            <td>${item.studentId}</td>
-
-            <td>${item.name}</td>
-
-            <td>${item.class}</td>
-
-            <td>${formatTime(item.timestamp)}</td>
-
-            <td>${item.status}</td>
-
-          `;
-
-
-          tbody.appendChild(tr);
-
-        }
-      );
-
+    document.getElementById(
+      'totalAttendance'
+    ).textContent =
+      result.totalAttendance;
 
   } catch (error) {
 
@@ -1804,69 +1449,69 @@ async function loadReport() {
 }
 
 
-// ==================================================
-// วันที่วันนี้
-// ==================================================
+/* =========================
+   REPORT
+========================= */
 
-function getToday() {
+async function loadReport() {
 
-  const date =
-    new Date();
-
-
-  const year =
-    date.getFullYear();
+  const result =
+    await api(
+      'getAttendance'
+    );
 
 
-  const month =
-    String(
-      date.getMonth() + 1
-    ).padStart(2, '0');
+  if (!result.success) {
 
+    return;
 
-  const day =
-    String(
-      date.getDate()
-    ).padStart(2, '0');
-
-
-  return (
-    year +
-    '-' +
-    month +
-    '-' +
-    day
-  );
-
-}
-
-
-// ==================================================
-// แสดงเวลา
-// ==================================================
-
-function formatTime(
-  value
-) {
-
-  if (!value) {
-    return '-';
   }
 
 
-  const date =
-    new Date(value);
+  const body =
+    document.getElementById(
+      'reportBody'
+    );
 
 
-  return date.toLocaleString(
-    'th-TH',
-    {
+  body.innerHTML = '';
 
-      dateStyle:
-        'short',
 
-      timeStyle:
-        'medium'
+  result.attendance.forEach(
+    row => {
+
+      const tr =
+        document.createElement(
+          'tr'
+        );
+
+
+      tr.innerHTML = `
+
+        <td>${escapeHtml(
+          row.studentId
+        )}</td>
+
+        <td>${escapeHtml(
+          row.name
+        )}</td>
+
+        <td>${escapeHtml(
+          row.className
+        )}</td>
+
+        <td>${escapeHtml(
+          row.timestamp
+        )}</td>
+
+        <td>${escapeHtml(
+          row.status
+        )}</td>
+
+      `;
+
+
+      body.appendChild(tr);
 
     }
   );
@@ -1874,23 +1519,69 @@ function formatTime(
 }
 
 
-// ==================================================
-// เริ่มระบบ
-// ==================================================
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(
+  text
+) {
+
+  return String(text || '')
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+/* =========================
+   SLEEP
+========================= */
+
+function sleep(ms) {
+
+  return new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        ms
+      )
+  );
+
+}
+
+
+/* =========================
+   START
+========================= */
 
 window.addEventListener(
   'load',
   async () => {
 
-    document
-      .getElementById(
-        'reportDate'
-      )
-      .value =
-      getToday();
-
-
     try {
+
+      await api(
+        'initialize'
+      );
 
       await loadStudents();
 
@@ -1907,7 +1598,7 @@ window.addEventListener(
 
 </script>
 
+
 </body>
 
 </html>
-```
