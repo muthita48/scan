@@ -1184,27 +1184,45 @@ async function scanLoop() {
 
   if (!scanRunning) return;
 
+  try {
 
-  const video =
-    document.getElementById(
-      'scanVideo'
-    );
+    const video = document.getElementById('scanVideo');
 
+    if (
+      !video ||
+      video.readyState < 2 ||
+      video.videoWidth === 0
+    ) {
+      document.getElementById('scanStatus').textContent =
+        'กำลังเตรียมกล้อง...';
 
-  const detections =
-    await faceapi
-      .detectAllFaces(
-        video,
-        new faceapi.TinyFaceDetectorOptions({
-          inputSize: 320,
-          scoreThreshold: 0.5
-        })
-      )
-      .withFaceLandmarks()
-      .withFaceDescriptors();
+      setTimeout(scanLoop, 1000);
+      return;
+    }
 
+    const detections =
+      await faceapi
+        .detectAllFaces(
+          video,
+          new faceapi.TinyFaceDetectorOptions({
+            inputSize: 320,
+            scoreThreshold: 0.5
+          })
+        )
+        .withFaceLandmarks()
+        .withFaceDescriptors();
 
-  if (detections.length > 0) {
+    if (detections.length === 0) {
+
+      document.getElementById('scanStatus').textContent =
+        'ไม่พบใบหน้า กรุณามองกล้อง';
+
+      setTimeout(scanLoop, 1500);
+      return;
+    }
+
+    document.getElementById('scanStatus').textContent =
+      `พบใบหน้า ${detections.length} ใบหน้า กำลังตรวจสอบ...`;
 
     for (const detection of detections) {
 
@@ -1213,30 +1231,54 @@ async function scanLoop() {
           detection.descriptor
         );
 
+      if (!match) {
 
-      if (
-        match &&
-        match.distance < 0.50
-      ) {
+        document.getElementById('scanStatus').textContent =
+          'ไม่พบข้อมูลนักเรียน';
+
+        continue;
+      }
+
+      document.getElementById('scanStatus').textContent =
+        `พบข้อมูล ${match.student.name} | ค่า Distance: ${match.distance.toFixed(3)}`;
+
+      console.log(
+        'Student:',
+        match.student
+      );
+
+      console.log(
+        'Distance:',
+        match.distance
+      );
+
+      // ทดลองใช้ 0.60 ก่อน
+      if (match.distance < 0.60) {
 
         await checkAttendance(
           match.student
         );
 
+      } else {
+
+        document.getElementById('scanStatus').textContent =
+          `ใบหน้าไม่ตรงกัน | Distance: ${match.distance.toFixed(3)}`;
+
       }
 
     }
 
+  } catch (error) {
+
+    console.error('SCAN ERROR:', error);
+
+    document.getElementById('scanStatus').textContent =
+      'เกิดข้อผิดพลาดในการสแกน: ' +
+      error.message;
   }
 
-
-  setTimeout(
-    scanLoop,
-    1500
-  );
-
+  setTimeout(scanLoop, 1500);
 }
-
 
 /* =========================
    FIND BEST STUDENT
