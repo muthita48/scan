@@ -666,7 +666,7 @@ td {
 ========================= */
 
 const GAS_URL =
-'https://script.google.com/macros/s/AKfycbxB40OrfZLsqOapLeXNvYmhZKiGMD6Q1T7x8Zeit7LJnmJHOm-4lubS3zt7HvuI8am1hw/exec';
+'https://script.google.com/macros/s/AKfycbzbyVLA-clTi5QA60jgsOa92OAvAy1QYGem6uZfYjv_IWdc3InKd4qHUiThEaLKICmZ3A/exec';
 
 
 const MODEL_URL =
@@ -1200,17 +1200,20 @@ async function scanLoop() {
       return;
     }
 
-    const detections =
-      await faceapi
-        .detectAllFaces(
-          video,
-          new faceapi.TinyFaceDetectorOptions({
-            inputSize: 320,
-            scoreThreshold: 0.5
-          })
-        )
-        .withFaceLandmarks()
-        .withFaceDescriptors();
+
+
+  const detections =
+    await faceapi
+      .detectAllFaces(
+        video,
+        new faceapi.TinyFaceDetectorOptions({
+          inputSize: 320,
+          scoreThreshold: 0.5
+        })
+      )
+      .withFaceLandmarks()
+      .withFaceDescriptors();
+
 
     if (detections.length === 0) {
 
@@ -1279,52 +1282,72 @@ async function scanLoop() {
 
   setTimeout(scanLoop, 1500);
 }
-
 /* =========================
    FIND BEST STUDENT
 ========================= */
 
-function findBestStudent(
-  descriptor
-) {
+function findBestStudent(descriptor) {
 
   let bestStudent = null;
-
   let bestDistance = Infinity;
 
+  if (!descriptor) {
+    return null;
+  }
+
+  // แปลง descriptor จากกล้อง
+  const currentDescriptor =
+    new Float32Array(descriptor);
+
+  console.log(
+    'Descriptor จากกล้อง:',
+    currentDescriptor.length
+  );
 
   for (const student of students) {
 
     if (
       !student.descriptors ||
-      student.descriptors.length === 0
+      !Array.isArray(student.descriptors)
     ) {
       continue;
     }
-
 
     for (
       const savedDescriptor
       of student.descriptors
     ) {
 
-      const distance =
-        faceapi.euclideanDistance(
-          descriptor,
+      if (
+        !Array.isArray(savedDescriptor) ||
+        savedDescriptor.length !== 128
+      ) {
+        continue;
+      }
+
+      const saved =
+        new Float32Array(
           savedDescriptor
         );
 
+      const distance =
+        faceapi.euclideanDistance(
+          currentDescriptor,
+          saved
+        );
+
+      console.log(
+        student.name,
+        'Distance =',
+        distance
+      );
 
       if (
-        distance <
-        bestDistance
+        distance < bestDistance
       ) {
 
-        bestDistance =
-          distance;
-
-        bestStudent =
-          student;
+        bestDistance = distance;
+        bestStudent = student;
 
       }
 
@@ -1332,21 +1355,27 @@ function findBestStudent(
 
   }
 
-
   if (!bestStudent) {
 
-    return null;
+    console.log(
+      'ไม่พบข้อมูล Face Descriptor'
+    );
 
+    return null;
   }
 
+  console.log(
+    'คนที่ใกล้ที่สุด:',
+    bestStudent.name,
+    'Distance:',
+    bestDistance
+  );
 
   return {
 
-    student:
-      bestStudent,
+    student: bestStudent,
 
-    distance:
-      bestDistance
+    distance: bestDistance
 
   };
 
