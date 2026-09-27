@@ -972,21 +972,19 @@ async function registerFace() {
       }
 
 
+      // เก็บ Face Descriptor ของใบหน้าที่ตรวจพบ
       descriptors.push(
-        Array.from(
-          detection.descriptor
-        )
+        Array.from(detection.descriptor)
       );
 
-
+      // แสดงสถานะการบันทึกตัวอย่าง
       document.getElementById(
         'registerStatus'
       ).textContent =
         `กำลังบันทึก ${i + 1}/5`;
 
-
+      // รอ 500 มิลลิวินาทีก่อนเก็บตัวอย่างถัดไป
       await sleep(500);
-
     }
 
 
