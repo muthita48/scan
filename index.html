@@ -932,7 +932,7 @@ async function registerFace() {
     }
 
 
-    document.getElementById(
+       document.getElementById(
       'registerStatus'
     ).textContent =
       'กำลังบันทึกใบหน้า...';
@@ -940,13 +940,21 @@ async function registerFace() {
 
     const descriptors = [];
 
+    // เก็บใบหน้า 5 ท่าทาง เพื่อให้ระบบมีข้อมูลใบหน้าหลายมุม
+    const poses = [
+      '1/5 กรุณาหันหน้าไปทางซ้าย',
+      '2/5 กรุณาหันหน้าไปทางขวา',
+      '3/5 กรุณายิ้ม',
+      '4/5 กรุณามองหน้าตรง',
+      '5/5 กรุณาก้มหน้า'
+    ];
 
-    /*
-      เก็บใบหน้า 5 ตัวอย่าง
-      เพื่อช่วยให้รู้จำได้แม่นขึ้น
-    */
+    for (let i = 0; i < poses.length; i++) {
 
-    for (let i = 0; i < 5; i++) {
+      document.getElementById('registerStatus').textContent = poses[i];
+
+      // รอให้ผู้ใช้เปลี่ยนท่าทางก่อนตรวจจับใบหน้า
+      await sleep(1500);
 
       const detection =
         await faceapi
@@ -960,33 +968,24 @@ async function registerFace() {
           .withFaceLandmarks()
           .withFaceDescriptor();
 
-
       if (!detection) {
-
         alert(
-          'ไม่พบใบหน้า กรุณามองกล้อง'
+          `ไม่พบใบหน้าในท่า ${i + 1}/5 กรุณาลองใหม่`
         );
-
         return;
-
       }
 
+      descriptors.push(Array.from(detection.descriptor));
 
-      // เก็บ Face Descriptor ของใบหน้าที่ตรวจพบ
-      descriptors.push(
-        Array.from(detection.descriptor)
-      );
+      document.getElementById('registerStatus').textContent =
+        `บันทึกท่าที่ ${i + 1}/5 สำเร็จ`;
 
-      // แสดงสถานะการบันทึกตัวอย่าง
-      document.getElementById(
-        'registerStatus'
-      ).textContent =
-        `กำลังบันทึก ${i + 1}/5`;
-
-      // รอ 500 มิลลิวินาทีก่อนเก็บตัวอย่างถัดไป
-      await sleep(500);
+      // เว้นเวลาเล็กน้อยก่อนเข้าสู่ท่าถัดไป
+      await sleep(700);
     }
 
+    document.getElementById('registerStatus').textContent =
+      'บันทึกใบหน้าครบทั้ง 5 ท่าแล้ว กำลังบันทึกข้อมูล...';
 
     const result =
       await api(
