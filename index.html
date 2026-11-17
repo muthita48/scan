@@ -3,13 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ระบบตรวจสอบการเข้าโรงเรียนด้วยใบหน้า</title>
+<title>ตรวจสอบการเข้าโรงเรียนจ่าการบุญ</title>
 <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,"Noto Sans Thai",sans-serif;background:#f1f5f9;color:#1e293b}
-header{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;padding:22px;text-align:center}
+header{
+  background-image:('https://tse1.mm.bing.net/th/id/OIP.KJBBOLKrjGUcA6UaUMpfogHaC9?r=0&rs=1&pid=ImgDetMain&o=7&rm=3');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  padding: 50px 22px;
+  text-align: center;
+}
 header h1{margin:0;font-size:25px} header p{margin:7px 0 0;opacity:.9}
 .container{max-width:1100px;margin:auto;padding:20px}
 .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
@@ -37,8 +45,7 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
 </head>
 <body>
 <header>
-  <h1>🏫 ระบบตรวจสอบการเข้าโรงเรียน</h1>
-  <p>ระบบรู้จำใบหน้า | บันทึกเวลาเข้าและออกอัตโนมัติ</p>
+  <h1>🏫 ตรวจสอบการเข้าโรงเรียนจ่าการบุญ</h1>
 </header>
 
 <div class="container">
@@ -57,7 +64,6 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
         <div class="stat"><h3>มีรายการเข้าเรียนวันนี้</h3><strong id="todayAttendance">0</strong></div>
         <div class="stat"><h3>รายการเข้าเรียนทั้งหมด</h3><strong id="totalAttendance">0</strong></div>
       </div>
-      <p class="note">ตัวเลขรายการวันนี้นับจำนวนนักเรียนที่มีการบันทึกเวลาเข้า ไม่ได้นับจำนวนครั้งที่สแกน</p>
       <button class="primary" onclick="loadDashboard()">รีเฟรชข้อมูล</button>
     </div>
   </section>
@@ -80,7 +86,6 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
         </div>
         <div id="registerStatus" class="status">กรอกข้อมูล เลือกระดับชั้นและห้อง แล้วเปิดกล้อง</div>
       </div>
-      <p class="note">ระบบจะเก็บข้อมูลตัวเลขใบหน้าสำหรับเปรียบเทียบ ไม่ได้เก็บภาพใบหน้าเป็นรูปถาวร กรุณาดำเนินการตามแนวทางคุ้มครองข้อมูลส่วนบุคคลของโรงเรียน</p>
     </div>
     <div class="card">
       <h3>รายชื่อนักเรียนที่ลงทะเบียน</h3>
@@ -98,10 +103,6 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
           <button class="primary danger" onclick="stopScan()">หยุดกล้อง</button>
         </div>
         <div id="scanStatus" class="status">กดเริ่มสแกนเพื่อเปิดกล้อง</div>
-      </div>
-      <div class="note">
-        <b>วิธีทำงาน:</b> สแกนครั้งแรกของวันระบบจะบันทึกเวลาเข้า และเมื่อสแกนอีกครั้งในวันเดียวกันระบบจะบันทึกเวลาออก
-        <br>ระบบจะไม่รับการสแกนออกภายใน 2 นาทีหลังบันทึกเวลาเข้า เพื่อป้องกันการสแกนซ้ำจากการยืนหน้ากล้องนานเกินไป
       </div>
     </div>
   </section>
@@ -269,7 +270,7 @@ function stopStream(stream) {
 
 async function startRegisterCamera() {
   try {
-    setStatus('registerStatus', 'กำลังโหลดโมเดล AI...');
+    setStatus('registerStatus');
     await loadModels();
     stopStream(registerStream);
     registerStream = await openCamera('registerVideo');
@@ -370,7 +371,7 @@ function renderStudentList() {
 async function startScan() {
   if (scanRunning) return;
   try {
-    setStatus('scanStatus', 'กำลังโหลดข้อมูลและโมเดล AI...');
+    setStatus('scanStatus');
     await loadModels();
     await loadStudents();
     if (!students.length) throw new Error('ยังไม่มีข้อมูลนักเรียน กรุณาลงทะเบียนก่อน');
@@ -395,7 +396,7 @@ async function scanLoop() {
   try {
     const video = document.getElementById('scanVideo');
     if (video.readyState < 2 || !video.videoWidth) {
-      setStatus('scanStatus', 'กำลังเตรียมกล้อง...');
+      setStatus('scanStatus', );
       return;
     }
 
@@ -486,7 +487,7 @@ async function loadReport() {
   const classLevel = document.getElementById('filterClass').value;
   const room = document.getElementById('filterRoom').value;
   const body = document.getElementById('reportBody');
-  body.innerHTML = '<tr><td colspan="7">กำลังโหลดข้อมูล...</td></tr>';
+  body.innerHTML = '<tr><td colspan="7"></td></tr>';
 
   try {
     const result = await api('getAttendance', {date, classLevel, room});
