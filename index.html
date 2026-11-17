@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ระบบตรวจสอบการเข้าโรงเรียนด้วยใบหน้า</title>
+<title>ตรวจสอบการเข้าโรงเรียนจ่าการบุญ</title>
 <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
@@ -37,8 +37,7 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
 </head>
 <body>
 <header>
-  <h1>🏫 ระบบตรวจสอบการเข้าโรงเรียน</h1>
-  <p>ระบบรู้จำใบหน้า | บันทึกเวลาเข้าและออกอัตโนมัติ</p>
+  <h1>🏫 ตรวจสอบการเข้าโรงเรียนจ่าการบุญ</h1>
 </header>
 
 <div class="container">
@@ -80,8 +79,6 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
         </div>
         <div id="registerStatus" class="status">กรอกข้อมูล เลือกระดับชั้นและห้อง แล้วเปิดกล้อง</div>
       </div>
-      <p class="note">ระบบจะเก็บข้อมูลตัวเลขใบหน้าสำหรับเปรียบเทียบ ไม่ได้เก็บภาพใบหน้าเป็นรูปถาวร กรุณาดำเนินการตามแนวทางคุ้มครองข้อมูลส่วนบุคคลของโรงเรียน</p>
-    </div>
     <div class="card">
       <h3>รายชื่อนักเรียนที่ลงทะเบียน</h3>
       <div class="table-wrap"><table><thead><tr><th>รหัส</th><th>ชื่อ</th><th>ชั้น</th><th>ห้อง</th></tr></thead><tbody id="studentListBody"></tbody></table></div>
@@ -98,10 +95,6 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
           <button class="primary danger" onclick="stopScan()">หยุดกล้อง</button>
         </div>
         <div id="scanStatus" class="status">กดเริ่มสแกนเพื่อเปิดกล้อง</div>
-      </div>
-      <div class="note">
-        <b>วิธีทำงาน:</b> สแกนครั้งแรกของวันระบบจะบันทึกเวลาเข้า และเมื่อสแกนอีกครั้งในวันเดียวกันระบบจะบันทึกเวลาออก
-        <br>ระบบจะไม่รับการสแกนออกภายใน 2 นาทีหลังบันทึกเวลาเข้า เพื่อป้องกันการสแกนซ้ำจากการยืนหน้ากล้องนานเกินไป
       </div>
     </div>
   </section>
@@ -133,7 +126,7 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
 <script>
 'use strict';
 
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxCf2ymrIcPEA1XJObRwfaZl0C4XJh2pJ7u4-MtExPKputUXPVmhlU1ttH9gIUzNxLlGw/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxhoo-d7lB4eqUmJHizISIyysD0b97iBSRIQEWAmkqGNVf0E7xjP_KvBx-GUhYl98Uc/exec';
 const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model';
 const MATCH_THRESHOLD = 0.60;
 const CLIENT_SCAN_COOLDOWN_MS = 12000;
@@ -197,7 +190,14 @@ async function loadModels() {
 
 async function loadClassOptions() {
   const result = await api('getClassOptions');
-  classOptions = {levels: result.levels || [], roomsByLevel: result.roomsByLevel || {}};
+  const roomsByLevel = result.roomsByLevel || {};
+  const levelNumber = value => Number((String(value).match(/ป\.\s*(\d+)/) || [])[1] || 999);
+  const roomNumber = value => Number((String(value).match(/^(\d+)/) || [])[1] || 999);
+  const levels = (result.levels || []).slice().sort((a, b) => levelNumber(a) - levelNumber(b));
+  Object.keys(roomsByLevel).forEach(level => {
+    roomsByLevel[level].sort((a, b) => roomNumber(a) - roomNumber(b) || String(a).localeCompare(String(b), 'th'));
+  });
+  classOptions = {levels, roomsByLevel};
   fillSelect('studentClassLevel', classOptions.levels, 'เลือกระดับชั้น');
   fillSelect('filterClass', classOptions.levels, 'ทุกระดับชั้น', true);
   updateRoomSelect();
@@ -262,7 +262,7 @@ function stopStream(stream) {
 
 async function startRegisterCamera() {
   try {
-    setStatus('registerStatus',');
+    setStatus('registerStatus', 'กำลังโหลดโมเดล AI...');
     await loadModels();
     stopStream(registerStream);
     registerStream = await openCamera('registerVideo');
@@ -363,7 +363,7 @@ function renderStudentList() {
 async function startScan() {
   if (scanRunning) return;
   try {
-    setStatus('scanStatus', '');
+    setStatus('scanStatus', 'กำลังโหลดข้อมูลและโมเดล AI...');
     await loadModels();
     await loadStudents();
     if (!students.length) throw new Error('ยังไม่มีข้อมูลนักเรียน กรุณาลงทะเบียนก่อน');
@@ -388,7 +388,7 @@ async function scanLoop() {
   try {
     const video = document.getElementById('scanVideo');
     if (video.readyState < 2 || !video.videoWidth) {
-      setStatus('scanStatus', 'รอสักครู่นะจ๊ะ');
+      setStatus('scanStatus', 'กำลังเตรียมกล้อง...');
       return;
     }
 
