@@ -133,7 +133,7 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
 <script>
 'use strict';
 
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwTXiwbHtLe3On1H5blBBdAm99UBUjvIhThecdN2iTVcusmHtK2ptkQSms1MdRQJeLiVA/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxCf2ymrIcPEA1XJObRwfaZl0C4XJh2pJ7u4-MtExPKputUXPVmhlU1ttH9gIUzNxLlGw/exec';
 const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model';
 const MATCH_THRESHOLD = 0.60;
 const CLIENT_SCAN_COOLDOWN_MS = 12000;
@@ -262,7 +262,7 @@ function stopStream(stream) {
 
 async function startRegisterCamera() {
   try {
-    setStatus('registerStatus', 'กำลังโหลดโมเดล AI...');
+    setStatus('registerStatus',');
     await loadModels();
     stopStream(registerStream);
     registerStream = await openCamera('registerVideo');
@@ -363,7 +363,7 @@ function renderStudentList() {
 async function startScan() {
   if (scanRunning) return;
   try {
-    setStatus('scanStatus', 'กำลังโหลดข้อมูลและโมเดล AI...');
+    setStatus('scanStatus', '');
     await loadModels();
     await loadStudents();
     if (!students.length) throw new Error('ยังไม่มีข้อมูลนักเรียน กรุณาลงทะเบียนก่อน');
@@ -388,7 +388,7 @@ async function scanLoop() {
   try {
     const video = document.getElementById('scanVideo');
     if (video.readyState < 2 || !video.videoWidth) {
-      setStatus('scanStatus', 'กำลังเตรียมกล้อง...');
+      setStatus('scanStatus', 'รอสักครู่นะจ๊ะ');
       return;
     }
 
