@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ตรวจสอบการเข้าโรงเรียนจ่าการบุญ</title>
+<title>ระบบตรวจสอบการเข้าโรงเรียนด้วยใบหน้า</title>
 <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
@@ -37,7 +37,8 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
 </head>
 <body>
 <header>
-  <h1>🏫 ตรวจสอบการเข้าโรงเรียนจ่าการบุญ</h1>
+  <h1>🏫 ระบบตรวจสอบการเข้าโรงเรียน</h1>
+  <p>ระบบรู้จำใบหน้า | บันทึกเวลาเข้าและออกอัตโนมัติ</p>
 </header>
 
 <div class="container">
@@ -79,6 +80,8 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
         </div>
         <div id="registerStatus" class="status">กรอกข้อมูล เลือกระดับชั้นและห้อง แล้วเปิดกล้อง</div>
       </div>
+      <p class="note">ระบบจะเก็บข้อมูลตัวเลขใบหน้าสำหรับเปรียบเทียบ ไม่ได้เก็บภาพใบหน้าเป็นรูปถาวร กรุณาดำเนินการตามแนวทางคุ้มครองข้อมูลส่วนบุคคลของโรงเรียน</p>
+    </div>
     <div class="card">
       <h3>รายชื่อนักเรียนที่ลงทะเบียน</h3>
       <div class="table-wrap"><table><thead><tr><th>รหัส</th><th>ชื่อ</th><th>ชั้น</th><th>ห้อง</th></tr></thead><tbody id="studentListBody"></tbody></table></div>
@@ -95,6 +98,10 @@ video{width:100%;max-width:640px;border-radius:15px;background:#000;display:bloc
           <button class="primary danger" onclick="stopScan()">หยุดกล้อง</button>
         </div>
         <div id="scanStatus" class="status">กดเริ่มสแกนเพื่อเปิดกล้อง</div>
+      </div>
+      <div class="note">
+        <b>วิธีทำงาน:</b> สแกนครั้งแรกของวันระบบจะบันทึกเวลาเข้า และเมื่อสแกนอีกครั้งในวันเดียวกันระบบจะบันทึกเวลาออก
+        <br>ระบบจะไม่รับการสแกนออกภายใน 2 นาทีหลังบันทึกเวลาเข้า เพื่อป้องกันการสแกนซ้ำจากการยืนหน้ากล้องนานเกินไป
       </div>
     </div>
   </section>
